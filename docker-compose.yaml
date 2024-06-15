@@ -1,0 +1,16 @@
+services:
+  wdb:
+    image: postgres:latest
+    container_name: wdb
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: waterloops
+    ports:
+      - '5432:5432'
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
